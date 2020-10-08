@@ -37,7 +37,7 @@ open class QRScannerViewController: UIViewController {
     override open func viewDidLoad() {
         super.viewDidLoad()
         setupCameraSession()
-        checkPermissions()
+//        checkPermissions()
         setUpLayout()
         setUpLayers()
     }
@@ -53,6 +53,12 @@ open class QRScannerViewController: UIViewController {
                 self?.delegate?.qrScannerDidFail(scanner: self!, error: QRScannerError.photoPermissionDenied)
             }
         }
+    }
+    
+    open override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        checkPermissions()
+        self.maskLayer.sublayers?.removeAll()
     }
     
     override open func viewDidAppear(_ animated: Bool) {
